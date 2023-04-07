@@ -1,0 +1,4 @@
+# Intepreter Cache
+__pycache__
+# Code editor configurations
+.vscode
