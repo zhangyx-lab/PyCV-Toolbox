@@ -58,7 +58,7 @@ def contrast(c: float, fit=None):
     return apply
 
 
-def gamma(g: float = None, reference: NDArray = None):
+def gamma(g: float = None, reference: NDArray | float = None):
     """
     (Lambda) Adjust given image by given gamma,
     gamma should be a positive float value.
@@ -72,8 +72,13 @@ def gamma(g: float = None, reference: NDArray = None):
             src = np.average(img)
             if reference is None:
                 dst = 0.5
+            elif isinstance(reference, np.ndarray):
+                dst = types.to_float(reference)
+                dst = types.trimToFit(dst)
+                dst = np.average(dst)
             else:
-                dst = np.average(reference)
+                assert isinstance(reference, float) or isinstance(reference, int), reference
+                dst = float(reference)
             g = math.log(dst) / math.log(src)
         # Run gamma correction
         return img ** g
