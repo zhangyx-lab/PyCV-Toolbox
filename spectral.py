@@ -17,6 +17,9 @@ def gray(weights=None, bands: list[float | int] = None):
             bands = np.array(range(img.shape[2]))
         if callable(weights):
             weights = weights(bands)
+        if isinstance(weights, np.ndarray):
+            weights = weights.astype(np.float32)
+            weights /= np.sum(weights)
         return np.average(img, axis=2, weights=weights)
     return apply
 

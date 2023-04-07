@@ -12,11 +12,11 @@ def resize(height: int = None, width: int = None):
     """
     if height is None:
         assert width is not None
-        def get_size(h, w, _): return int(h * width / w), width
+        def get_size(h, w, _): return width, int(h * width / w)
     elif width is None:
-        def get_size(h, w, _): return height, int(w * height / h)
+        def get_size(h, w, _): return int(w * height / h), height
     else:
-        def get_size(h, w, _): return h, w
+        def get_size(h, w, _): return w, h
 
     def apply(img: NDArray):
         img = misc.D3(img)

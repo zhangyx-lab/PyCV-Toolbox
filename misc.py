@@ -81,7 +81,7 @@ def pad(*sizes: int, color: NDArray[np.floating] | float | int = 0, top=None, le
         color = types.MatchType(img)(tmp).reshape((1, 1, -1))
         # Create an empty canvas with padding color
         canvas = np.zeros(
-            (left + right + h, top + bottom + w, d), dtype=img.dtype)
+            (top + bottom + h, left + right + w, d), dtype=img.dtype)
         # Broadcast padding color into canvas
         canvas[:, :] = color
         # Put image into its position
