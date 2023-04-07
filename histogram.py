@@ -68,6 +68,7 @@ def gamma(g: float = None, reference: NDArray | float = None):
     def apply(img: NDArray):
         nonlocal g, reference
         img = types.to_float(img)
+        img = types.trimToFit(img)
         if g is None:
             src = np.average(img)
             if reference is None:
