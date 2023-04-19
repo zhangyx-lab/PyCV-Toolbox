@@ -17,6 +17,10 @@ def trimToFit(img: NDArray, lim=[0, 1]) -> NDArray:
 def scaleToFit(img: NDArray, lim=[0, 1]) -> NDArray:
     # Caculate source dynamic range
     drange = [np.min(img), np.max(img)]
+    # Check if image is uniform
+    if drange[0] == drange[1]:
+        img += 0.5 - np.average(drange)
+        return img
     # Create numerical projection
     projection = fx.project(drange, lim)
     # Apply to image and return
@@ -29,8 +33,13 @@ def scaleToFitDR(img: NDArray, pos=[0.05, 0.95], dr=None, lim=[0, 1]) -> NDArray
         dr = pos
     # Caculate source dynamic range
     dynamic = histogram.dynamic(*pos)
+    drange = dynamic(img)
+    # Check if image is uniform
+    if drange[0] == drange[1]:
+        img = np.average(drange)
+        return img
     # Create numerical projection
-    projection = fx.project(dynamic(img), dr)
+    projection = fx.project(drange, dr)
     # Apply to image and return
     return trimToFit(projection(img), lim)
 
