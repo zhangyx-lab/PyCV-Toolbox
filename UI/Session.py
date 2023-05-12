@@ -19,9 +19,3 @@ class Session:
     def __exit__(self, errType, err, trace):
         for window in self.windows:
             window.__enter__()
-
-    def main_loop(self, waitKeyDuration=0):
-        user_key = cv2.waitKey(waitKeyDuration)
-        for window in self.windows:
-            window.onKey(user_key)
-        return user_key
