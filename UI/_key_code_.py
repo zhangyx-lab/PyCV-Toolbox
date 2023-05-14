@@ -1,8 +1,8 @@
 KEYCODE = {
-    "arrow_up": 0,
-    "arrow_down": 1,
-    "arrow_left": 2,
-    "arrow_right": 3,
+    "arrow_left": 81,
+    "arrow_up": 82,
+    "arrow_right": 83,
+    "arrow_down": 84,
 
     "enter": 13,
     "escape": 27,
